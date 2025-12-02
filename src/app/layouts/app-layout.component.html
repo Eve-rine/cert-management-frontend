@@ -1,0 +1,74 @@
+<!-- src/app/app.component.html -->
+
+<!-- Show main layout for all except /login -->
+<ng-container *ngIf="!isLoginPage; else loginLayout">
+  <div class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header class="navbar navbar-dark bg-primary px-4">
+      <a class="navbar-brand" href="#">Cert Management Admin</a>
+      <div class="d-flex align-items-center">
+        <span class="me-3"><i class="bi bi-person-circle"></i> {{ userRole }}</span>
+        <button class="btn btn-outline-light btn-sm" (click)="logout()">Logout</button>
+      </div>
+    </header>
+
+    <div class="flex-grow-1 d-flex">
+      <!-- Sidebar -->
+      <nav class="sidebar bg-light border-end pt-4 px-3" style="width: 220px;">
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a routerLink="/dashboard" class="nav-link fw-semibold">
+              <i class="bi bi-grid"></i> Dashboard
+            </a>
+          </li>
+          <!-- Only ADMIN gets these -->
+          <ng-container *ngIf="userRole==='ADMIN'">
+            <li class="nav-item mb-2">
+              <a routerLink="/customers" class="nav-link fw-semibold">
+                <i class="bi bi-people"></i> View Customers
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a routerLink="/add-customer" class="nav-link">
+                <i class="bi bi-person-plus"></i> Add Customer
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a routerLink="/users" class="nav-link fw-semibold">
+                <i class="bi bi-person"></i> View Users
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a routerLink="/add-user" class="nav-link">
+                <i class="bi bi-person-plus-fill"></i> Add User
+              </a>
+            </li>
+          </ng-container>
+          <!-- User role menu (template upload) -->
+          <ng-container *ngIf="userRole==='USER'">
+            <li class="nav-item mb-2">
+              <a routerLink="/upload-template" class="nav-link fw-semibold">
+                <i class="bi bi-cloud-upload"></i> Upload Template
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="flex-grow-1 p-4">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+    <footer class="bg-light border-top py-2 text-center mt-auto">
+      <small>&copy; 2025 Cert Management Portal</small>
+    </footer>
+  </div>
+</ng-container>
+
+<!-- Minimal login layout when on /login -->
+<ng-template #loginLayout>
+  <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center bg-light">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>
