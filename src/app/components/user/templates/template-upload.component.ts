@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { QuillModule } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class TemplateUploadComponent {
     const formData = new FormData();
     formData.append('file', file);
 
-    this.http.post('http://localhost:8080/api/templates/upload', formData)
+    this.http.post(`${environment.apiUrl}/api/templates/upload`, formData)
       .subscribe({
         next: _ => this.uploadSuccess = true,
         error: _ => this.uploadSuccess = false
