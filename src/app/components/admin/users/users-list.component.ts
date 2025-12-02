@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UsersService, User } from '../../services/users.service';
-import { CustomersService, Customer } from '../../services/customers.service';
+import { UsersService, User } from '../../../services/users.service';
+import { CustomersService, Customer } from '../../../services/customers.service';
 declare var bootstrap: any;
 
 @Component({

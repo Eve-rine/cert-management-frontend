@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <div *ngIf="loading">Loading fields...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <form *ngIf="!loading && schema && form" [formGroup]="form" (ngSubmit)="onSubmit()" class="mb-3">
+    <div *ngFor="let key of (schema?.required || [])" class="mb-3">
+      <label [for]="key" class="form-label fw-bold">{{ key.replace('_', ' ') | titlecase }}</label>
+      <input 
+        class="form-control" 
+        [id]="key" 
+        [formControlName]="key"
+        [placeholder]="key.replace('_', ' ') | titlecase"
+        [attr.required]="schema.required.includes(key) ? true : null"
+        />
+      <div *ngIf="form.get(key)?.touched && form.get(key)?.invalid" class="text-danger">
+        This field is required.
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid || loading">Generate PDF</button>
+  </form>
+
+  <div *ngIf="generatedId" class="mb-2">
+    <button (click)="downloadPdf()" class="btn btn-success">Download Certificate PDF</button>
+    <div class="text-success mt-2"><strong>Certificate generated!</strong></div>
+  </div>
+</div>

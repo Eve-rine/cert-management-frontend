@@ -1,0 +1,11 @@
+<form (ngSubmit)="uploadTemplate()">
+  <quill-editor [(ngModel)]="htmlContent" name="template"
+  [theme]="'snow'"
+    [modules]="editorModules"
+    [styles]="{height: '400px'}"
+    [placeholder]="certificatePlaceholder">
+  </quill-editor>
+  <button type="button" class="btn btn-secondary mt-2" (click)="downloadAsFile()">Preview/Download as HTML</button>
+  <button type="submit" class="btn btn-primary mt-2">Upload</button>
+</form>
+<div *ngIf="uploadSuccess" class="alert alert-success mt-2">Template uploaded!</div>
