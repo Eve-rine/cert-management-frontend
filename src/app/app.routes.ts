@@ -5,6 +5,7 @@ import { UsersListComponent } from './components/admin/users/users-list.componen
 import { RoleGuard } from './guards/role.guard';
 import { TemplateUploadComponent } from './components/user/templates/template-upload.component';
 import { GenerateCertificateComponent } from './components/user/certificates/generate-certificate.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
       { path: 'login', component: LoginComponent },
@@ -12,7 +13,8 @@ export const routes: Routes = [
       {path: '', redirectTo: 'login', pathMatch: 'full' },
       {path:'users',component:UsersListComponent},
       {path:'template-upload',component:TemplateUploadComponent},
-      { path: 'generate-certificate', component: GenerateCertificateComponent }
+      {path: 'certificate-generation', component: GenerateCertificateComponent },
+      {path:'dashboard',component: DashboardComponent},
 
 //   { path: 'admin', component: AdminHomeComponent, canActivate: [RoleGuard] },
 ];

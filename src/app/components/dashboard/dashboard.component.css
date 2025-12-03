@@ -1,0 +1,23 @@
+.dashboard-card {
+  background: white;
+  border-radius: 1rem;
+}
+.bg-gradient-light {
+  background: linear-gradient(to right, #f0f4f8, #ffffff 80%);
+}
+.card-title i {
+  margin-right: 0.5rem;
+}
+.list-unstyled li i {
+  color: #3498db;
+  margin-right: 0.2rem;
+}
+@media (max-width: 768px) {
+  .dashboard-card {
+    padding: 0;
+    margin-top: 2.5rem !important;
+  }
+  .card-body {
+    padding: 1.2rem !important;
+  }
+}

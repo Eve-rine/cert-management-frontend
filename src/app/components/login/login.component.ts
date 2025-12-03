@@ -19,9 +19,10 @@ export class LoginComponent {
   login() {
     this.auth.login(this.username, this.password).subscribe({
       next: () => {
-        const role = this.auth.getRole();
-        if (role === 'ADMIN') this.router.navigate(['/admin']);
-        else this.router.navigate(['/certificates']);
+        // const role = this.auth.getRole();
+        // if (role === 'ADMIN') this.router.navigate(['/admin']);
+        // else this.router.navigate(['/certificates']);
+        this.router.navigate(['/dashboard']);
       },
       error: err => this.error = 'Invalid credentials'
     });

@@ -1,0 +1,19 @@
+/* Highlight active nav-link */
+.sidebar .nav-link.active {
+  color: #fff;
+  background: #007bff;
+  border-radius: 0.4rem;
+  font-weight: bold;
+}
+
+.sidebar .nav-link {
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* On hover, add slight background for all */
+.sidebar .nav-link:hover {
+  background: #e9ecef;
+  color: #0056b3;
+  text-decoration: none;
+}
