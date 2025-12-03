@@ -4,69 +4,94 @@
 <ng-container *ngIf="!isLoginPage; else loginLayout">
     <div class="d-flex flex-column min-vh-100">
         <!-- Header -->
-        <header class="navbar navbar-dark bg-primary px-4">
-            <a class="navbar-brand" href="#">Cert Management Admin</a>
-            <div class="d-flex align-items-center">
-                <span class="me-3"><i class="bi bi-person-circle"></i> {{ userRole }}</span>
-                <button class="btn btn-outline-light btn-sm" (click)="logout()">Logout</button>
+        <header class="app-header">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="header-icon me-3">
+                            <i class="bi bi-award-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0 fw-bold">Cert Management</h5>
+                            <small class="text-muted">Admin Portal</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="user-badge me-3">
+                            <i class="bi bi-person-circle me-2"></i>
+                            <span>{{ userRole }}</span>
+                        </div>
+                        <button class="btn btn-logout" (click)="logout()">
+                            <i class="bi bi-box-arrow-right me-2"></i>Logout
+                        </button>
+                    </div>
+                </div>
             </div>
         </header>
 
         <div class="flex-grow-1 d-flex">
             <!-- Sidebar -->
-            <nav class="sidebar bg-light border-end pt-4 px-3" style="width: 220px;">
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2">
-                        <a routerLink="/dashboard" class="nav-link fw-semibold" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }">
-                            <i class="bi bi-grid"></i> Dashboard
-                        </a>
-                    </li>
-                    <ng-container *ngIf="userRole==='ADMIN'">
-                        <li class="nav-item mb-2">
-                            <a routerLink="/customers" class="nav-link fw-semibold" routerLinkActive="active"
+            <nav class="app-sidebar">
+                <div class="sidebar-content">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a routerLink="/dashboard" class="sidebar-link" routerLinkActive="active"
                                 [routerLinkActiveOptions]="{ exact: true }">
-                                <i class="bi bi-people"></i> Customers
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="nav-item mb-2">
-                            <a routerLink="/users" class="nav-link fw-semibold" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">
-                                <i class="bi bi-person"></i> Users
-                            </a>
-                        </li>
-                    </ng-container>
-                    <ng-container *ngIf="userRole==='USER'">
-                        <li class="nav-item mb-2">
-                            <a routerLink="/template-upload" class="nav-link fw-semibold" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">
-                                <i class="bi bi-cloud-upload"></i> Upload Template
-                            </a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a routerLink="/certificate-generation" class="nav-link fw-semibold"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                                <i class="bi bi-file-earmark-medical"></i> Generate Certificate
-                            </a>
-                        </li>
-                    </ng-container>
-                </ul>
+                        <ng-container *ngIf="userRole==='ADMIN'">
+                            <li class="nav-item">
+                                <a routerLink="/customers" class="sidebar-link" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{ exact: true }">
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Customers</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/users" class="sidebar-link" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{ exact: true }">
+                                    <i class="bi bi-person-fill"></i>
+                                    <span>Users</span>
+                                </a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="userRole==='USER'">
+                            <li class="nav-item">
+                                <a routerLink="/template-upload" class="sidebar-link" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{ exact: true }">
+                                    <i class="bi bi-cloud-upload-fill"></i>
+                                    <span>Upload Template</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/certificate-generation" class="sidebar-link"
+                                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                                    <i class="bi bi-file-earmark-medical-fill"></i>
+                                    <span>Generate Certificate</span>
+                                </a>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
             </nav>
 
             <!-- Main Content -->
-            <main class="flex-grow-1 p-4">
+            <main class="app-main">
                 <router-outlet></router-outlet>
             </main>
         </div>
-        <footer class="bg-light border-top py-2 text-center mt-auto">
-            <small>&copy; 2025 Cert Management Portal</small>
+        
+        <footer class="app-footer">
+            <small>&copy; 2025 Cert Management Portal. All rights reserved.</small>
         </footer>
     </div>
 </ng-container>
 
 <!-- Minimal login layout when on /login -->
 <ng-template #loginLayout>
-    <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center bg-light">
+    <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center" style="background: #f5f7fa;">
         <router-outlet></router-outlet>
     </div>
 </ng-template>

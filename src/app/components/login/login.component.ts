@@ -7,12 +7,14 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
+  styleUrls: ['login.component.css'],
   imports: [CommonModule, FormsModule],
 })
 export class LoginComponent {
   username = '';
   password = '';
   error = '';
+  showPassword = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 

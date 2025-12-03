@@ -8,6 +8,7 @@ declare var bootstrap: any;
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.css'],
   imports: [CommonModule, FormsModule]
 })
 export class UsersListComponent implements OnInit {

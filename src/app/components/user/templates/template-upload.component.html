@@ -1,11 +1,71 @@
-<form (ngSubmit)="uploadTemplate()">
-  <quill-editor [(ngModel)]="htmlContent" name="template"
-  [theme]="'snow'"
-    [modules]="editorModules"
-    [styles]="{height: '400px'}"
-    [placeholder]="certificatePlaceholder">
-  </quill-editor>
-  <button type="button" class="btn btn-secondary mt-2" (click)="downloadAsFile()">Preview/Download as HTML</button>
-  <button type="submit" class="btn btn-primary mt-2">Upload</button>
-</form>
-<div *ngIf="uploadSuccess" class="alert alert-success mt-2">Template uploaded!</div>
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h3 class="mb-1 fw-bold">Upload Certificate Template</h3>
+      <p class="text-muted mb-0">Design and upload your custom certificate template</p>
+    </div>
+  </div>
+
+  <div class="editor-card">
+    <!-- Instructions Section -->
+    <div class="instructions-banner">
+      <div class="d-flex align-items-start">
+        <div class="info-icon me-3">
+          <i class="bi bi-info-circle-fill"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold mb-1">Template Instructions</h6>
+          <p class="mb-0 small">Use the editor below to design your certificate template. You can add text, images, and formatting. Use placeholders like <code>{{ '{{' }}field_name{{ '}}' }}</code> for dynamic content.</p>
+        </div>
+      </div>
+    </div>
+
+    <form (ngSubmit)="uploadTemplate()">
+      <!-- Editor Section -->
+      <div class="editor-section">
+        <label class="form-label fw-semibold mb-3">
+          <i class="bi bi-code-square me-2"></i>Certificate Template Editor
+        </label>
+        <div class="editor-wrapper">
+          <quill-editor 
+            [(ngModel)]="htmlContent" 
+            name="template"
+            [theme]="'snow'"
+            [modules]="editorModules"
+            [styles]="{height: '400px'}"
+            [placeholder]="certificatePlaceholder">
+          </quill-editor>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <button type="button" class="btn-preview" (click)="downloadAsFile()">
+          <i class="bi bi-eye me-2"></i>Preview/Download HTML
+        </button>
+        <button type="submit" class="btn-upload">
+          <i class="bi bi-cloud-upload me-2"></i>Upload Template
+        </button>
+      </div>
+    </form>
+
+    <!-- Success Message -->
+    <div *ngIf="uploadSuccess" class="success-message">
+      <i class="bi bi-check-circle-fill me-2"></i>
+      Template uploaded successfully!
+    </div>
+  </div>
+
+  <!-- Help Section -->
+  <div class="help-card mt-4">
+    <h6 class="fw-bold mb-3">
+      <i class="bi bi-lightbulb me-2"></i>Quick Tips
+    </h6>
+    <ul class="tips-list">
+      <li>Use placeholders like <code>{{ '{{' }}name{{ '}}' }}</code>, <code>{{ '{{' }}date{{ '}}' }}</code>, or <code>{{ '{{' }}course_title{{ '}}' }}</code> for dynamic fields</li>
+      <li>Style your text using the editor toolbar (bold, italic, colors, fonts)</li>
+      <li>Add images by using the image button in the toolbar</li>
+      <li>Preview your template before uploading to ensure it looks correct</li>
+    </ul>
+  </div>
+</div>
