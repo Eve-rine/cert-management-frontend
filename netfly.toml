@@ -1,6 +1,6 @@
 [build]
   command = "npm install --legacy-peer-deps && npm run build"
-  publish = "dist/cert-management-frontend"
+  publish = "dist/cert-management-frontend/browser"
 
 [build.environment]
   NODE_VERSION = "22.21.1"
