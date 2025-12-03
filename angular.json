@@ -23,7 +23,11 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "_redirects"
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
               "node_modules/quill/dist/quill.snow.css",
@@ -90,7 +94,11 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "_redirects"
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
                 "node_modules/quill/dist/quill.snow.css",
