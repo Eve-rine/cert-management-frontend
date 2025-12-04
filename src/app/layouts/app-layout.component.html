@@ -58,18 +58,18 @@
                             </li>
                         </ng-container>
                         <ng-container *ngIf="userRole==='USER'">
+                                                        <li class="nav-item">
+                                <a routerLink="/templates" class="sidebar-link" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{ exact: true }">
+                                    <i class="bi bi-list"></i>
+                                    <span>Templates</span>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a routerLink="/template-upload" class="sidebar-link" routerLinkActive="active"
                                     [routerLinkActiveOptions]="{ exact: true }">
                                     <i class="bi bi-cloud-upload-fill"></i>
                                     <span>Upload Template</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a routerLink="/certificate-generation" class="sidebar-link"
-                                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>Generate Certificate</span>
                                 </a>
                             </li>
                         </ng-container>
