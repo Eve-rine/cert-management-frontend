@@ -13,8 +13,9 @@ declare var bootstrap: any;
 })
 export class UsersListComponent implements OnInit {
   users: User[] = [];
-  customers: Customer[] = []; // <--- Add this
+  customers: Customer[] = [];
   form: User = { name: '', username: '', password: '', role: 'USER', customerId: '' };
+  editingUser: User | null = null;
   success = '';
   error = '';
 
@@ -38,11 +39,25 @@ export class UsersListComponent implements OnInit {
   loadCustomers() {
     this.customersService.getCustomers().subscribe({
       next: (customers) => this.customers = customers,
-      error: () => {} // Suppress error during user add flow
+      error: () => {}
     });
   }
 
-  openModal() {
+  openModal(user?: User) {
+    if (user) {
+      this.editingUser = user;
+      this.form = {
+        name: user.name || '',
+        username: user.username,
+        password: '', 
+        role: user.role,
+        customerId: user.customerId || ''
+      };
+    } else {
+      this.editingUser = null;
+      this.form = { name: '', username: '', password: '', role: 'USER', customerId: '' };
+    }
+    
     const modalEl = document.getElementById('addUserModal');
     if (modalEl) {
       const modal = new bootstrap.Modal(modalEl);
@@ -50,31 +65,90 @@ export class UsersListComponent implements OnInit {
     }
   }
 
-  addUser() {
-    if (!this.form.name || !this.form.username || !this.form.password || !this.form.role) {
+  saveUser() {
+    if (!this.form.name || !this.form.username) {
       this.error = 'Please fill all required fields';
       this.success = '';
       return;
     }
-    let userPayload = { ...this.form };
-    if (userPayload.role !== 'USER') delete userPayload.customerId;
-    this.usersService.createUser(userPayload).subscribe({
-      next: () => {
-        this.success = 'User added successfully!';
-        this.error = '';
-        this.loadUsers();
-        this.form = { name: '', username: '', password: '', role: 'USER', customerId: '' };
-        const modalEl = document.getElementById('addUserModal');
-        if (modalEl) {
-          const modal = bootstrap.Modal.getInstance(modalEl);
-          if (modal) modal.hide();
+
+    // Password is required only when creating new user
+    if (!this.editingUser && !this.form.password) {
+      this.error = 'Password is required for new users';
+      this.success = '';
+      return;
+    }
+
+    console.log("editingUser:", this.editingUser);
+    let userPayload: any = { ...this.form };
+    
+    // Remove customerId if role is not USER
+    if (userPayload.role !== 'USER') {
+      delete userPayload.customerId;
+    }
+
+    // Don't send empty password on update
+    if (this.editingUser && !userPayload.password) {
+      delete userPayload.password;
+    }
+
+    if (this.editingUser?.id) {
+      this.usersService.updateUser(this.editingUser.id, userPayload).subscribe({
+        next: () => {
+          this.success = 'User updated successfully!';
+          this.error = '';
+          this.loadUsers();
+          this.closeModal();
+          setTimeout(() => this.success = '', 2000);
+        },
+        error: () => {
+          this.error = 'Failed to update user';
+          this.success = '';
         }
-        setTimeout(() => this.success = '', 2000);
-      },
-      error: () => {
-        this.error = 'Failed to create user';
-        this.success = '';
-      }
-    });
+      });
+    } else {
+      this.usersService.createUser(userPayload).subscribe({
+        next: () => {
+          this.success = 'User added successfully!';
+          this.error = '';
+          this.loadUsers();
+          this.closeModal();
+          setTimeout(() => this.success = '', 2000);
+        },
+        error: () => {
+          this.error = 'Failed to create user';
+          this.success = '';
+        }
+      });
+    }
+  }
+
+  deleteUser(user: User) {
+    if (!user.id) return;
+    
+    if (confirm(`Are you sure you want to delete user ${user.username}?`)) {
+      this.usersService.deleteUser(user.id).subscribe({
+        next: () => {
+          this.success = 'User deleted successfully!';
+          this.error = '';
+          this.loadUsers();
+          setTimeout(() => this.success = '', 2000);
+        },
+        error: () => {
+          this.error = 'Failed to delete user';
+          this.success = '';
+        }
+      });
+    }
+  }
+
+  closeModal() {
+    this.form = { name: '', username: '', password: '', role: 'USER', customerId: '' };
+    this.editingUser = null;
+    const modalEl = document.getElementById('addUserModal');
+    if (modalEl) {
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    }
   }
 }

@@ -7,7 +7,8 @@ export interface Customer {
   id?: string;
   name: string;
   email: string;
-  phone?: string;}
+  phone?: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class CustomersService {
@@ -21,5 +22,13 @@ export class CustomersService {
 
   createCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.baseUrl, customer);
+  }
+
+  updateCustomer(id: string, customer: Customer): Observable<Customer> {
+    return this.http.put<Customer>(`${this.baseUrl}/${id}`, customer);
+  }
+
+  deleteCustomer(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
