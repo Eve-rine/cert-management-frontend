@@ -29,14 +29,18 @@ describe('LoginComponent', () => {
   it('should create login component', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should navigate on successful login', () => {
-    mockAuthService.login.and.returnValue(of({}));
-    component.username = 'user';
-    component.password = 'pass';
-    component.login();
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/dashboard']);
-  });
+it('should navigate on successful login', () => {
+  mockAuthService.login.and.returnValue(of({
+    accessToken: 'fake-token',
+    expiry: Date.now() + 10000,
+    role: 'USER',
+    customerId: 'cid123'
+  }));
+  component.username = 'user';
+  component.password = 'pass';
+  component.login();
+  expect(routerSpy.navigate).toHaveBeenCalledWith(['/dashboard']);
+});
 
   it('should set error on failed login', () => {
     mockAuthService.login.and.returnValue(throwError(() => new Error()));
