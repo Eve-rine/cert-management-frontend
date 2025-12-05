@@ -24,11 +24,9 @@ export class App {
   }
     get isLoginPage(): boolean {
     return this.router.url === '/login';
-    // Or: return this.router.url.startsWith('/login');
   }
 
   ngOnInit() {
-    // Load current role from storage (adjust key as needed)
     this.userRole = localStorage.getItem('user_role') || '';
   }
 
