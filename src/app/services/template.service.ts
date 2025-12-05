@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { TemplateDto } from '../components/user/templates/template-upload.component';
+import { TemplateDto } from '../components/user/template-upload/template-upload.component';
 
 @Injectable({providedIn: 'root'})
 export class TemplateService {
