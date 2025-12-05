@@ -37,7 +37,6 @@ export class JwtInterceptor implements HttpInterceptor {
         if (error.status === 401 || error.status === 403) {
           console.warn('Unauthorized or forbidden, redirecting to login...');
           
-          // Optional: clear token
           localStorage.removeItem('jwt_token');
 
           // Redirect
