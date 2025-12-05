@@ -15,13 +15,13 @@
         </div>
         <div>
           <h6 class="fw-bold mb-1">Template Instructions</h6>
-          <p class="mb-0 small">Use the editor below to design your certificate template. You can add text, images, and formatting. Use placeholders like <code>{{ '{{' }}field_name{{ '}}' }}</code> for dynamic content.</p>
+          <p class="mb-0 small">Use the editor below to design your certificate template. You can add text, images, and
+            formatting. Use placeholders like <code>{{ '{{' }}field_name{{ '}}' }}</code> for dynamic content.</p>
         </div>
       </div>
     </div>
-
+    <!-- 
     <form (ngSubmit)="uploadTemplate()">
-      <!-- Editor Section -->
       <div class="editor-section">
         <label class="form-label fw-semibold mb-3">
           <i class="bi bi-code-square me-2"></i>Certificate Template Editor
@@ -38,7 +38,6 @@
         </div>
       </div>
 
-      <!-- Action Buttons -->
       <div class="form-actions">
         <button type="button" class="btn-preview" (click)="downloadAsFile()">
           <i class="bi bi-eye me-2"></i>Preview/Download HTML
@@ -47,8 +46,71 @@
           <i class="bi bi-cloud-upload me-2"></i>Upload Template
         </button>
       </div>
-    </form>
+    </form> -->
 
+    <form (ngSubmit)="uploadTemplate()" enctype="multipart/form-data">
+      <!-- Editor Section -->
+
+
+        <div class="editor-section mb-4">
+                  <label class="form-label fw-semibold">
+          <i class="bi bi-card-text me-2"></i>Template Name
+        </label>
+          <input type="text" [(ngModel)]="templateName" name="templateName" class="form-control" required>
+        </div>
+        <div class="mb-3">
+        <label class="form-label fw-semibold mb-3">
+          <i class="bi bi-code-square me-2"></i>Certificate Template Editor
+        </label>
+        <div class="editor-wrapper">
+          <quill-editor [(ngModel)]="htmlContent" name="template" [theme]="'snow'" [modules]="editorModules"
+            [styles]="{height: '400px'}" [placeholder]="certificatePlaceholder">
+          </quill-editor>
+        </div>
+      </div>
+
+      <!-- Logo Upload Section -->
+      <!-- <div class="mb-3">
+        <label class="form-label fw-semibold">
+          <i class="bi bi-image me-2"></i>Logo Image
+        </label>
+        <input type="file" (change)="onLogoSelected($event)" accept="image/*" class="form-control">
+        <div *ngIf="logoPreview" class="mt-2">
+          <img [src]="logoPreview" alt="Logo Preview" style="height:48px; border-radius:4px;">
+        </div>
+      </div> -->
+
+      <!-- Signature Upload Section -->
+      <!-- <div class="mb-3">
+        <label class="form-label fw-semibold">
+          <i class="bi bi-pencil me-2"></i>Signature Image
+        </label>
+        <input type="file" (change)="onSignatureSelected($event)" accept="image/*" class="form-control">
+        <div *ngIf="signaturePreview" class="mt-2">
+          <img [src]="signaturePreview" alt="Signature Preview" style="height:48px; border-radius:4px;">
+        </div>
+      </div> -->
+
+      <!-- Action Buttons -->
+      <div class="form-actions mb-3">
+        <button type="button" class="btn btn-outline-secondary btn-preview me-2" (click)="downloadAsFile()">
+          <i class="bi bi-eye me-2"></i>Preview/Download HTML
+        </button>
+        <button type="submit" class="btn btn-primary btn-upload">
+          <i class="bi bi-cloud-upload me-2"></i>Upload Template
+        </button>
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="uploadSuccess" class="alert alert-success">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Template uploaded successfully!
+      </div>
+    </form>
+    <div *ngIf="uploadSuccess" class="success-message mt-3">
+      <i class="bi bi-check-circle-fill me-2"></i>
+      Template uploaded successfully!
+    </div>
     <!-- Success Message -->
     <div *ngIf="uploadSuccess" class="success-message">
       <i class="bi bi-check-circle-fill me-2"></i>
@@ -62,7 +124,8 @@
       <i class="bi bi-lightbulb me-2"></i>Quick Tips
     </h6>
     <ul class="tips-list">
-      <li>Use placeholders like <code>{{ '{{' }}name{{ '}}' }}</code>, <code>{{ '{{' }}date{{ '}}' }}</code>, or <code>{{ '{{' }}course_title{{ '}}' }}</code> for dynamic fields</li>
+      <li>Use placeholders like <code>{{ '{{' }}name{{ '}}' }}</code>, <code>{{ '{{' }}date{{ '}}' }}</code>, or
+        <code>{{ '{{' }}course_title{{ '}}' }}</code> for dynamic fields</li>
       <li>Style your text using the editor toolbar (bold, italic, colors, fonts)</li>
       <li>Add images by using the image button in the toolbar</li>
       <li>Preview your template before uploading to ensure it looks correct</li>

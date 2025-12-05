@@ -1,0 +1,244 @@
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h3 {
+  color: #212529;
+  font-size: 1.75rem;
+}
+
+.btn-add {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.2);
+}
+
+.btn-add:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(108, 117, 125, 0.3);
+}
+
+/* Content Card */
+.content-card {
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Table Styles */
+.data-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.data-table thead {
+  background: #f8f9fa;
+}
+
+.data-table thead th {
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #f0f2f5;
+  transition: all 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.data-table tbody td {
+  padding: 1rem 1.25rem;
+  color: #495057;
+}
+
+/* Avatar Circle */
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #6c757d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Role Badges */
+.role-badge {
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.role-admin {
+  background: #6c757d;
+  color: white;
+}
+
+.role-user {
+  background: #e9ecef;
+  color: #495057;
+}
+
+/* Action Buttons */
+.btn-action {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-action-edit {
+  background: #e7f0ff;
+  color: #0d6efd;
+}
+
+.btn-action-edit:hover {
+  background: #0d6efd;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-action-delete {
+  background: #ffe7e7;
+  color: #dc3545;
+}
+
+.btn-action-delete:hover {
+  background: #dc3545;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Modal Styles */
+.custom-modal {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.custom-modal .modal-header {
+  background: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+  padding: 1.5rem;
+}
+
+.custom-modal .modal-body {
+  padding: 1.5rem;
+}
+
+.custom-modal .modal-footer {
+  background: #f8f9fa;
+  border-top: 2px solid #e9ecef;
+  padding: 1rem 1.5rem;
+}
+
+.custom-input {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+  border-color: #6c757d;
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.15);
+}
+
+.btn-primary-custom {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+.btn-secondary-custom {
+  background: #e9ecef;
+  color: #495057;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+  background: #dee2e6;
+}
+
+.custom-alert {
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin: 0;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .btn-add {
+    width: 100%;
+  }
+  
+  .avatar-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+  
+  .data-table thead th,
+  .data-table tbody td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}

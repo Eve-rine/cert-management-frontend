@@ -49,12 +49,9 @@
           "configurations": {
             "production": {
               "buildTarget": "cert-management-frontend:build:production"
-            },
-            "development": {
-              "buildTarget": "cert-management-frontend:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"

@@ -1,0 +1,35 @@
+<form (ngSubmit)="submitEdit()" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label>Name</label>
+    <input type="text" [(ngModel)]="name" name="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Certificate HTML</label>
+<quill-editor 
+  [(ngModel)]="htmlContent"
+  name="template"
+  [theme]="'snow'"
+  [modules]="editorModules"
+  style="height: 400px;"
+  placeholder="Edit certificate template here">
+</quill-editor>
+  </div>
+  <!-- <div class="mb-3">
+    <label>Logo Image</label>
+    <input type="file" (change)="onLogoSelected($event)" accept="image/*" class="form-control">
+    <div *ngIf="logoPreview" class="mt-2">
+      <img [src]="logoPreview" style="height:48px;">
+    </div>
+  </div> -->
+  <!-- <div class="mb-3">
+    <label>Signature Image</label>
+    <input type="file" (change)="onSignatureSelected($event)" accept="image/*" class="form-control">
+    <div *ngIf="signaturePreview" class="mt-2">
+      <img [src]="signaturePreview" style="height:48px;">
+    </div>
+  </div> -->
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+  <div *ngIf="uploadSuccess" class="alert alert-success mt-3">
+    Template updated successfully!
+  </div>
+</form>

@@ -4,9 +4,10 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 export interface User {
-name?: string;
+  id?: string;
+  name?: string;
   username: string;
-  password: string;
+  password?: string;
   role: 'USER' | 'ADMIN';
   customerId?: string | null;
 }
@@ -23,5 +24,13 @@ export class UsersService {
 
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.baseUrl, user);
+  }
+
+  updateUser(id: string, user: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/${id}`, user);
+  }
+
+  deleteUser(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
