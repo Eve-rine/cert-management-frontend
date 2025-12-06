@@ -1,59 +1,50 @@
 # CertManagementFrontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+Angular frontend for Sec CERTIFICATE — upload/manage templates, preview certificate data, request signed PDF generation, and download certificates via the backend API.
 
-## Development server
+Generated with Angular CLI v20.x.
 
-To start a local development server, run:
-
+## Quick start (development)
+1. Clone and install
 ```bash
-ng serve
+git clone https://github.com/Eve-rine/cert-management-frontend.git
+cd cert-management-frontend
+npm ci
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+2. Configure API base URL
+- Edit `src/environments/environment.ts` (and `environment.prod.ts`) and set:
+```ts
+export const environment = {
+  production: false,
+  apiBaseUrl: 'http://localhost:8080/api'
+};
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Run locally
 ```bash
-ng generate --help
+npm start
+# or
+ng serve --open
 ```
+Open http://localhost:4200
 
-## Building
+## Key scripts
+- Start dev server: `npm start` / `ng serve`
+- Build production: `ng build`
+- Unit tests: `ng test`
 
-To build the project run:
+## Expected backend endpoints
+The frontend expects a JWT-secured API exposing:
+- `POST /auth/login` — return JWT
+- `POST /api/templates/upload` — multipart upload (html)
+- `GET /api/templates` — list templates for current customer
+- `POST /api/certificates/generate` — generate signed PDF (returns id)
+- `GET /api/certificates/{id}/pdf` — download signed PDF or return presigned URL
 
-```bash
-ng build
-```
+All API calls should include `Authorization: Bearer <token>`.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Notes
+- Designed to work with the companion Spring Boot backend, PostgreSQL, and S3/MinIO (or local storage).
+- Keep `apiBaseUrl` consistent between frontend and backend.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
